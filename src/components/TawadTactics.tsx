@@ -121,7 +121,7 @@ export const TawadTactics: React.FC = () => {
     <div className="space-y-6 animate-in fade-in duration-500">
       <div className="text-center max-w-2xl mx-auto mb-8">
         <h2 className="text-4xl font-bold mb-3 flex items-center justify-center gap-3 text-gray-900 dark:text-white tracking-tight">
-          <Handshake className="text-blue-500" size={36} />
+          <img src="/tawadtactics.png" alt="TawadTactics" className="w-10 h-10 object-contain rounded-lg shadow-sm" />
           TawadTactics Analyzer
         </h2>
         <p className="text-gray-500 dark:text-gray-400 text-lg">Find your smartest move in everyday Filipino negotiations.</p>

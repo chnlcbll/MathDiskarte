@@ -4,12 +4,16 @@ import { ChevronDown, Search, Mail } from 'lucide-react';
 import { playSound } from '../utils/audio';
 
 const faqs = [
-  { question: "What is TamaBa?", answer: "TamaBa? is a propositional logic analyzer that helps you determine if everyday Filipino claims, promos, and rules make logical sense. It checks if an argument is valid or a fallacy." },
-  { question: "How does the Logic Engine work?", answer: "The logic engine converts your selected premises into symbolic logic (e.g., P → Q). It then evaluates if the conclusion necessarily follows from the premises. If it does, the argument is valid. If there is a scenario where the premises are true but the conclusion is false, it is a fallacy." },
-  { question: "What is Modus Ponens?", answer: "Modus Ponens is a valid form of argument: 'If P then Q. P is true. Therefore, Q is true.' (Example: If it rains, the street gets wet. It is raining. Therefore, the street is wet.)" },
-  { question: "What is Modus Tollens?", answer: "Modus Tollens is a valid form of argument: 'If P then Q. Q is false. Therefore, P is false.' (Example: If it rains, the street gets wet. The street is not wet. Therefore, it is not raining.)" },
-  { question: "What is Affirming the Consequent?", answer: "It is a logical fallacy: 'If P then Q. Q is true. Therefore, P is true.' (Example: If it rains, the street gets wet. The street is wet. Therefore, it rained. -> Fallacy, because the street could be wet for another reason, like someone washing their car.)" },
-  { question: "What is Denying the Antecedent?", answer: "It is a logical fallacy: 'If P then Q. P is false. Therefore, Q is false.' (Example: If it rains, the street gets wet. It is not raining. Therefore, the street is not wet. -> Fallacy, because again, someone could be washing their car.)" }
+  { question: "What is TamaBa?", answer: "TamaBa? is an everyday rule checker that helps you understand whether a rule, promo, requirement, or claim applies to your situation using basic logic." },
+  { question: "How does the Rule Checker work?", answer: "It takes a common scenario (like a Free Shipping promo), breaks down the rule into simple Yes/No questions, and gives you a clear verdict based on logical conditions (AND, OR, IF-THEN, IF AND ONLY IF)." },
+  { question: "What does the 'Math Behind It' section show?", answer: "It shows how your everyday situation translates into propositional logic. It displays variables (p, q, r), logical connectives (∧, ∨, →, ↔), and truth values to show the mathematical proof behind the verdict." },
+  { question: "Why is a 'Budol Claim' an implication?", answer: "Claims like 'If it is discounted, then it is automatically sulit' follow an 'If P then Q' structure (P → Q). TamaBa helps you see that just because the first part is true (discounted), it doesn't always guarantee the second part (sulit)." },
+  { question: "What is the 'IF AND ONLY IF' logic?", answer: "A biconditional (p ↔ q) means both conditions must match. Either both must be true, or both must be false for the result to apply. For example: 'A refund is given if and only if the item is defective AND returned within 7 days.'" },
+  { question: "Can I add my own rules?", answer: "Yes! You can use the 'Create Custom Rule' button. It lets you define the rule name, result statement, conditions, and choose the logic type (AND, OR, IF-THEN, IF AND ONLY IF). Your custom rules are automatically saved locally." },
+  { question: "Are my custom rules saved?", answer: "Yes, custom rules are saved locally to your device's browser using local storage. They will be there the next time you visit, unless you clear your browsing data or click the delete (trash) icon on the rule card." },
+  { question: "What if I don't know the answer to one of the conditions?", answer: "You can select 'Not Sure'. If you do, the checker will return a 'KULANG ANG IMPORMASYON' (Insufficient Information) verdict, as the logic cannot be fully evaluated without complete facts." },
+  { question: "Can TamaBa? solve math equations?", answer: "No, TamaBa? is strictly for propositional logic and evaluating statements (true/false conditions). It does not solve numerical equations like algebra or calculus." },
+  { question: "Are fallacies checked in TamaBa?", answer: "TamaBa? primarily checks the truth value of everyday claims using direct propositional logic structures. Fallacies (like Denying the Antecedent) are intrinsically handled through implication structures (p → q)." }
 ];
 
 export const TamaBaHelp: React.FC = () => {
@@ -22,8 +26,8 @@ export const TamaBaHelp: React.FC = () => {
   };
 
   const filteredFaqs = faqs.filter(
-    faq => faq.question.toLowerCase().includes(searchQuery.toLowerCase()) || 
-           faq.answer.toLowerCase().includes(searchQuery.toLowerCase())
+    faq => faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            faq.answer.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -44,8 +48,8 @@ export const TamaBaHelp: React.FC = () => {
           </div>
         </div>
 
-        <h3 className="text-xl font-bold mb-2">Propositional Logic FAQs</h3>
-        <p className="text-sm text-gray-500 mb-4">Learn about valid arguments, fallacies, and how TamaBa? evaluates statements.</p>
+        <h3 className="text-xl font-bold mb-2">Everyday Rule Checker FAQs</h3>
+        <p className="text-sm text-gray-500 mb-4">Learn about how TamaBa? evaluates everyday rules and promos.</p>
 
         {filteredFaqs.length === 0 ? (
           <div className="text-sm text-gray-500 py-4 italic">No matching questions found.</div>
@@ -54,6 +58,7 @@ export const TamaBaHelp: React.FC = () => {
             {filteredFaqs.map((faq, index) => {
               const id = `tamaba-${index}`;
               const isOpen = openIndex === id;
+
               return (
                 <div 
                   key={id} 
@@ -98,6 +103,7 @@ export const TamaBaHelp: React.FC = () => {
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
             Have questions, issues, or suggestions? Reach out to us directly via email.
           </p>
+
           <div className="bg-white dark:bg-black/40 rounded-xl p-3 border border-black/5 dark:border-white/5 mb-6">
             <div className="text-xs uppercase tracking-widest font-bold text-gray-400 mb-1">Developer Email</div>
             <a href="mailto:christianelle_cabello@dlsu.edu.ph" className="text-sm font-medium text-purple-600 dark:text-purple-400 break-all select-all hover:underline">

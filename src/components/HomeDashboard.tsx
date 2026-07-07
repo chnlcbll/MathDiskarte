@@ -35,8 +35,8 @@ export const HomeDashboard: React.FC<Props> = ({ onNavigate, username }) => {
             className="flex flex-col items-start p-6 sm:p-8 bg-white dark:bg-[#141417] rounded-3xl hover:border-teal-500 border border-transparent transition-all group shadow-sm dark:shadow-none text-left relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-teal-500/5 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
-            <div className="w-16 h-16 bg-teal-50 dark:bg-black/40 border border-teal-100 dark:border-white/5 rounded-2xl flex items-center justify-center mb-6 shadow-inner group-hover:scale-110 transition-transform">
-              <PiggyBank className="text-teal-600 dark:text-teal-400" size={32} />
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-md group-hover:scale-110 transition-transform overflow-hidden">
+              <img src="/IponTubo.png" alt="IponTubo" className="w-full h-full object-cover" />
             </div>
             <h3 className="font-bold text-xl text-gray-900 dark:text-white mb-2">IponTubo</h3>
             <p className="text-sm font-semibold text-teal-600 dark:text-teal-500 mb-3 uppercase tracking-wider">Plan your ipon and investment growth.</p>
@@ -55,8 +55,8 @@ export const HomeDashboard: React.FC<Props> = ({ onNavigate, username }) => {
             className="flex flex-col items-start p-6 sm:p-8 bg-white dark:bg-[#141417] rounded-3xl hover:border-blue-500 border border-transparent transition-all group shadow-sm dark:shadow-none text-left relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-blue-500/20 transition-all"></div>
-            <div className="w-16 h-16 bg-blue-50 dark:bg-black/40 border border-blue-100 dark:border-white/5 rounded-2xl flex items-center justify-center mb-6 shadow-inner group-hover:scale-110 transition-transform">
-              <Handshake className="text-blue-600 dark:text-blue-400" size={32} />
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-md group-hover:scale-110 transition-transform overflow-hidden">
+              <img src="/tawadtactics.png" alt="TawadTactics" className="w-full h-full object-cover" />
             </div>
             <h3 className="font-bold text-xl text-gray-900 dark:text-white mb-2">TawadTactics</h3>
             <p className="text-sm font-semibold text-blue-600 dark:text-blue-500 mb-3 uppercase tracking-wider">Analyze tawad and negotiation strategies.</p>
@@ -75,8 +75,8 @@ export const HomeDashboard: React.FC<Props> = ({ onNavigate, username }) => {
             className="flex flex-col items-start p-6 sm:p-8 bg-white dark:bg-[#141417] rounded-3xl hover:border-purple-500 border border-transparent transition-all group shadow-sm dark:shadow-none text-left relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full blur-3xl group-hover:bg-purple-500/20 transition-all"></div>
-            <div className="w-16 h-16 bg-purple-50 dark:bg-black/40 border border-purple-100 dark:border-white/5 rounded-2xl flex items-center justify-center mb-6 shadow-inner group-hover:scale-110 transition-transform">
-              <CheckCircle2 className="text-purple-600 dark:text-purple-400" size={32} />
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-md group-hover:scale-110 transition-transform overflow-hidden">
+              <img src="/tamaba.png" alt="TamaBa?" className="w-full h-full object-cover" />
             </div>
             <h3 className="font-bold text-xl text-gray-900 dark:text-white mb-2">TamaBa?</h3>
             <p className="text-sm font-semibold text-purple-600 dark:text-purple-500 mb-3 uppercase tracking-wider">Check if everyday claims make logical sense.</p>
