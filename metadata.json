@@ -1,0 +1,8 @@
+{
+  "name": "MathDiskarte",
+  "description": "A Filipino everyday math toolkit that helps users make smarter decisions about money, negotiation, and logical reasoning.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
