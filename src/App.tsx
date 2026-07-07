@@ -209,8 +209,8 @@ export default function App() {
           className="flex items-center gap-3 font-semibold text-lg cursor-pointer"
           onClick={() => setMainTool('home')}
         >
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-teal-400 to-teal-700 flex items-center justify-center text-white dark:text-gray-100 shadow-md">
-            <span className="font-bold text-sm">MD</span>
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center overflow-hidden shadow-md">
+            <img src="/mathdiskarte.png" alt="MD" className="w-full h-full object-cover" />
           </div>
           <span className="inline">Math<span className="dark:text-teal-500">Diskarte</span></span>
         </motion.div>

@@ -88,7 +88,7 @@ export const AnimatedBackground: React.FC = () => {
             ease: "linear",
             delay: Math.random() * 15
           }}
-          className="absolute text-2xl md:text-5xl font-serif text-teal-600/40 dark:text-teal-400/30 select-none pointer-events-none drop-shadow-2xl font-bold"
+          className="absolute text-2xl md:text-5xl font-serif text-teal-600/40 dark:text-teal-400/50 select-none pointer-events-none drop-shadow-2xl font-bold"
         >
           {symbols[Math.floor(Math.random() * symbols.length)]}
         </motion.div>
@@ -105,11 +105,11 @@ export const AnimatedBackground: React.FC = () => {
               rotateZ: [0, 45, 90],
             }}
             transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
-            className="absolute top-[10%] -left-[10%] md:-left-12 w-48 h-48 border-[2px] border-teal-500/20 dark:border-teal-400/30"
+            className="absolute top-[10%] -left-[10%] md:-left-12 w-48 h-48 border-[2px] border-teal-500/20 dark:border-teal-400/50"
             style={{ transformStyle: 'preserve-3d' }}
           >
-            <div className="absolute inset-0 border-[2px] border-teal-500/20 dark:border-teal-400/30 [transform:rotateX(90deg)_translateZ(96px)]" />
-            <div className="absolute inset-0 border-[2px] border-teal-500/20 dark:border-teal-400/30 [transform:rotateY(90deg)_translateZ(96px)]" />
+            <div className="absolute inset-0 border-[2px] border-teal-500/20 dark:border-teal-400/50 [transform:rotateX(90deg)_translateZ(96px)]" />
+            <div className="absolute inset-0 border-[2px] border-teal-500/20 dark:border-teal-400/50 [transform:rotateY(90deg)_translateZ(96px)]" />
           </motion.div>
 
           <motion.div
@@ -119,11 +119,11 @@ export const AnimatedBackground: React.FC = () => {
               scale: [1, 1.2, 1],
             }}
             transition={{ duration: 50, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -bottom-[5%] -right-[10%] md:-right-12 w-64 h-64 border-[4px] border-blue-500/10 dark:border-blue-400/20 rounded-full flex items-center justify-center"
+            className="absolute -bottom-[5%] -right-[10%] md:-right-12 w-64 h-64 border-[4px] border-blue-500/10 dark:border-blue-400/40 rounded-full flex items-center justify-center"
           >
-            <div className="w-48 h-48 border-[2px] border-blue-500/20 dark:border-blue-400/30 rounded-full" />
-            <div className="absolute w-64 h-64 border-[2px] border-blue-500/20 dark:border-blue-400/30 rounded-full rotate-45 scale-y-50" />
-            <div className="absolute w-64 h-64 border-[2px] border-blue-500/20 dark:border-blue-400/30 rounded-full -rotate-45 scale-y-50" />
+            <div className="w-48 h-48 border-[2px] border-blue-500/20 dark:border-blue-400/50 rounded-full" />
+            <div className="absolute w-64 h-64 border-[2px] border-blue-500/20 dark:border-blue-400/50 rounded-full rotate-45 scale-y-50" />
+            <div className="absolute w-64 h-64 border-[2px] border-blue-500/20 dark:border-blue-400/50 rounded-full -rotate-45 scale-y-50" />
           </motion.div>
 
           <motion.div
@@ -133,7 +133,7 @@ export const AnimatedBackground: React.FC = () => {
               rotate: [0, 90, 180, 270, 360],
             }}
             transition={{ duration: 55, repeat: Infinity, ease: "linear" }}
-            className="absolute top-[20%] right-[2%] md:right-[5%] w-32 h-32 border-[3px] border-purple-500/10 dark:border-purple-400/30 rotate-45 backdrop-blur-3xl"
+            className="absolute top-[20%] right-[2%] md:right-[5%] w-32 h-32 border-[3px] border-purple-500/10 dark:border-purple-400/50 rotate-45 backdrop-blur-3xl"
           />
 
           <motion.div
@@ -144,17 +144,17 @@ export const AnimatedBackground: React.FC = () => {
               rotateZ: [0, 360],
             }}
             transition={{ duration: 60, repeat: Infinity, ease: "linear", delay: 2 }}
-            className="absolute bottom-[20%] left-[2%] md:left-[5%] w-40 h-40 border-[2px] border-pink-500/10 dark:border-pink-400/30 flex items-center justify-center"
+            className="absolute bottom-[20%] left-[2%] md:left-[5%] w-40 h-40 border-[2px] border-pink-500/10 dark:border-pink-400/50 flex items-center justify-center"
             style={{ transformStyle: 'preserve-3d' }}
           >
-            <div className="absolute w-full h-full border-[2px] border-pink-500/10 dark:border-pink-400/30 [transform:rotateX(60deg)]" />
-            <div className="absolute w-full h-full border-[2px] border-pink-500/10 dark:border-pink-400/30 [transform:rotateY(60deg)]" />
+            <div className="absolute w-full h-full border-[2px] border-pink-500/10 dark:border-pink-400/50 [transform:rotateX(60deg)]" />
+            <div className="absolute w-full h-full border-[2px] border-pink-500/10 dark:border-pink-400/50 [transform:rotateY(60deg)]" />
           </motion.div>
         </>
       )}
 
       {/* 4. Abstract Sacred Geometry Overlay */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-[0.04] dark:opacity-[0.02] mix-blend-overlay pointer-events-none">
+      <div className="absolute inset-0 flex items-center justify-center opacity-[0.04] dark:opacity-[0.05] mix-blend-overlay pointer-events-none">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 120, repeat: Infinity, ease: "linear" }}

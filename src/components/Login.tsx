@@ -43,8 +43,8 @@ export const Login: React.FC<Props> = ({ onLogin }) => {
         className="w-full max-w-md bg-white/80 dark:bg-[#141417]/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-200 dark:border-white/10 p-8 z-10"
       >
         <div className="flex justify-center mb-8">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-400 to-teal-700 flex items-center justify-center text-white shadow-xl font-bold text-2xl">
-            MD
+          <div className="w-16 h-16 rounded-2xl flex items-center justify-center overflow-hidden shadow-xl">
+            <img src="/mathdiskarte.png" alt="MD" className="w-full h-full object-cover" />
           </div>
         </div>
 
