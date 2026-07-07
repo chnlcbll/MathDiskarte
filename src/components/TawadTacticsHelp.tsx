@@ -45,6 +45,9 @@ export const TawadTacticsHelp: React.FC = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
+          <p className="text-xs text-gray-500 mt-2 pl-2">
+            💡 Tip: Search for keywords (e.g., "tax", "inflation") rather than full questions for best results.
+          </p>
         </div>
 
         <h3 className="text-xl font-bold mb-2">Game Theory & Negotiation FAQs</h3>
@@ -121,6 +124,7 @@ export const TawadTacticsHelp: React.FC = () => {
             </ul>
             
             <p className="text-sm text-blue-600 dark:text-blue-400 font-bold mt-1">GEMATMW Z19 - Group 8</p>
+            <p className="text-[8px] text-gray-400/80 dark:text-gray-500 mt-6 leading-tight">Disclaimer: Some parts were made with the help of Gemini.</p>
           </div>
         </div>
       </div>

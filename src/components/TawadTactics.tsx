@@ -128,7 +128,7 @@ export const TawadTactics: React.FC = () => {
       </div>
 
       {/* Quick Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8" id="tour-tawadtactics-scenarios">
         {presets.map(p => (
           <button
             key={p.id}

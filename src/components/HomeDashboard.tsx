@@ -30,8 +30,9 @@ export const HomeDashboard: React.FC<Props> = ({ onNavigate, username }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
           {/* IponTubo */}
+          
           <button
-            onClick={() => { playSound(); onNavigate('ipontubo'); }}
+            id="tour-tool-ipontubo" onClick={() => { playSound(); onNavigate('ipontubo'); }}
             className="flex flex-col items-start p-6 sm:p-8 bg-white dark:bg-[#141417] rounded-3xl hover:border-teal-500 border border-transparent transition-all group shadow-sm dark:shadow-none text-left relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-teal-500/5 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
@@ -51,7 +52,7 @@ export const HomeDashboard: React.FC<Props> = ({ onNavigate, username }) => {
 
           {/* TawadTactics */}
           <button
-            onClick={() => { playSound(); onNavigate('tawadtactics'); }}
+            id="tour-tool-tawadtactics" onClick={() => { playSound(); onNavigate('tawadtactics'); }}
             className="flex flex-col items-start p-6 sm:p-8 bg-white dark:bg-[#141417] rounded-3xl hover:border-blue-500 border border-transparent transition-all group shadow-sm dark:shadow-none text-left relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-blue-500/20 transition-all"></div>
@@ -71,7 +72,7 @@ export const HomeDashboard: React.FC<Props> = ({ onNavigate, username }) => {
 
           {/* TamaBa? */}
           <button
-            onClick={() => { playSound(); onNavigate('tamaba'); }}
+            id="tour-tool-tamaba" onClick={() => { playSound(); onNavigate('tamaba'); }}
             className="flex flex-col items-start p-6 sm:p-8 bg-white dark:bg-[#141417] rounded-3xl hover:border-purple-500 border border-transparent transition-all group shadow-sm dark:shadow-none text-left relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full blur-3xl group-hover:bg-purple-500/20 transition-all"></div>

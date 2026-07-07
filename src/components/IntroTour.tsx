@@ -2,20 +2,22 @@ import React, { useEffect } from 'react';
 import { driver } from 'driver.js';
 import 'driver.js/dist/driver.css';
 
+
 interface Props {
   onClose: () => void;
   setAppView: (view: 'dashboard' | 'calculator') => void;
-  setActiveTab: (tab: 'tbond' | 'mp2' | 'goalseek' | 'compare' | 'fire') => void;
+  setActiveTab: (tab: 'tbond' | 'mp2' | 'compare' | 'goalseek' | 'fire') => void;
   switchTheme: () => void;
   setHelpOpen: (open: boolean) => void;
   setSidebarOpen: (open: boolean) => void;
+  setMainTool?: (tool: 'home' | 'ipontubo' | 'tawadtactics' | 'tamaba') => void;
 }
 
-export const IntroTour: React.FC<Props> = ({ onClose, setAppView, setActiveTab, switchTheme, setHelpOpen, setSidebarOpen }) => {
-  // Use refs to avoid re-triggering the effect when callbacks change
-  const callbacksRef = React.useRef({ onClose, setAppView, setActiveTab, switchTheme, setHelpOpen, setSidebarOpen });
+export const IntroTour: React.FC<Props> = ({ onClose, setAppView, setActiveTab, switchTheme, setHelpOpen, setSidebarOpen, setMainTool }) => {
+  const callbacksRef = React.useRef({ onClose, setAppView, setActiveTab, switchTheme, setHelpOpen, setSidebarOpen, setMainTool });
+
   useEffect(() => {
-    callbacksRef.current = { onClose, setAppView, setActiveTab, switchTheme, setHelpOpen, setSidebarOpen };
+    callbacksRef.current = { onClose, setAppView, setActiveTab, switchTheme, setHelpOpen, setSidebarOpen, setMainTool };
   });
 
   useEffect(() => {
@@ -41,17 +43,181 @@ export const IntroTour: React.FC<Props> = ({ onClose, setAppView, setActiveTab, 
       steps: [
         {
           popover: {
-            title: 'Welcome to IponTubo!',
-            description: 'Let us show you around your premium companion for Retail Treasury Bonds (RTBs), MP2, and goal-seek investment planning.',
-            side: "bottom", align: 'center'
+            title: 'Welcome to MathDiskarte!',
+            description: 'Your complete Filipino everyday math toolkit. Let\'s take a tour of all the features and tools available to you.',
+            side: "bottom", align: 'center',
+            onNextClick: () => {
+              if (callbacksRef.current.setMainTool) callbacksRef.current.setMainTool('home');
+              setTimeout(() => tourDriver.moveNext(), 600);
+            }
+          }
+        },
+        {
+          element: '#tour-tool-ipontubo',
+          popover: {
+            title: 'IponTubo',
+            description: 'This is the first main tool. It helps you calculate and project the growth of your investments like MP2 and Retail Treasury Bonds.',
+            side: "bottom", align: 'start'
+          }
+        },
+        {
+          element: '#tour-tool-tawadtactics',
+          popover: {
+            title: 'TawadTactics',
+            description: 'The second tool utilizes Game Theory to analyze and improve your pricing strategies and negotiations in everyday scenarios like tiangge shopping or freelancing.',
+            side: "bottom", align: 'start'
+          }
+        },
+        {
+          element: '#tour-tool-tamaba',
+          popover: {
+            title: 'TamaBa?',
+            description: 'The third tool is a logic checker. It tests if promotional claims, rules, and conditions actually make logical sense using propositional logic.',
+            side: "bottom", align: 'start',
+            onNextClick: () => {
+              if (callbacksRef.current.setMainTool) callbacksRef.current.setMainTool('ipontubo');
+              callbacksRef.current.setAppView('dashboard');
+              setTimeout(() => tourDriver.moveNext(), 600);
+            }
           }
         },
         {
           element: '#tour-welcome',
           popover: {
-            title: 'Your Dashboard',
-            description: 'This is your portfolio overview. The greeting message will keep you motivated!',
+            title: 'IponTubo Dashboard',
+            description: 'Welcome to the IponTubo dashboard. Here you can see a summary of all your monitored investments and potential returns.',
             side: "bottom", align: 'start'
+          }
+        },
+        {
+          element: '#tour-new-projection',
+          popover: {
+            title: 'Create Calculations',
+            description: 'You can create new financial projections here. Let\'s explore the RTB calculator next!',
+            side: "top", align: 'center',
+            onNextClick: () => {
+              callbacksRef.current.setAppView('calculator');
+              callbacksRef.current.setActiveTab('tbond');
+              setTimeout(() => tourDriver.moveNext(), 600);
+            }
+          }
+        },
+        {
+          element: '#tour-rtb-metrics',
+          popover: {
+            title: 'RTB Analysis & Inflation',
+            description: 'Calculate your returns on Retail Treasury Bonds. You can even toggle the Inflation Adjuster to see your Real Return limit.',
+            side: "top", align: 'center'
+          }
+        },
+        {
+          element: '#tour-quarterly-payout',
+          popover: {
+            title: 'Quarterly Dividends',
+            description: 'Find out exactly how much you can expect to receive every 3 months after withholding tax.',
+            side: "top", align: 'center',
+            onNextClick: () => {
+              callbacksRef.current.setActiveTab('mp2');
+              setTimeout(() => tourDriver.moveNext(), 600);
+            }
+          }
+        },
+        {
+          element: '#tour-mp2-metrics',
+          popover: {
+            title: 'MP2 Analysis',
+            description: 'For your Pag-IBIG MP2 tax-free compound growth, you can see your total accumulated dividends and principal sum.',
+            side: "top", align: 'center',
+            onNextClick: () => {
+              callbacksRef.current.setActiveTab('compare');
+              setTimeout(() => tourDriver.moveNext(), 600);
+            }
+          }
+        },
+        {
+          element: '#tour-compare-tab',
+          popover: {
+            title: 'RTB vs MP2',
+            description: 'A side-by-side comparison between RTB and MP2 to help you decide which asset grows your wealth faster.',
+            side: "bottom", align: 'center',
+            onNextClick: () => {
+              callbacksRef.current.setActiveTab('goalseek');
+              setTimeout(() => tourDriver.moveNext(), 600);
+            }
+          }
+        },
+        {
+          element: '#tour-goalseek-tab',
+          popover: {
+            title: 'Goal-Seek Calculator',
+            description: 'Switch to Goal-Seek mode to reverse-engineer your investments. Set a target amount and time horizon to find the required deposit.',
+            side: "bottom", align: 'center',
+            onNextClick: () => {
+              callbacksRef.current.setActiveTab('fire');
+              setTimeout(() => tourDriver.moveNext(), 600);
+            }
+          }
+        },
+        {
+          element: '#tour-fire-tab',
+          popover: {
+            title: 'F.I.R.E. Targeter',
+            description: 'Calculate your path to Financial Independence. Find out how much you need to invest to cover your monthly expenses passively.',
+            side: "bottom", align: 'center',
+            onNextClick: () => {
+              if (callbacksRef.current.setMainTool) callbacksRef.current.setMainTool('tawadtactics');
+              setTimeout(() => tourDriver.moveNext(), 600);
+            }
+          }
+        },
+        {
+          element: '#tour-tawadtactics-scenarios',
+          popover: {
+            title: 'TawadTactics Presets',
+            description: 'Now we are in TawadTactics! You can start by choosing from these preset scenarios representing common Filipino negotiation situations.',
+            side: "bottom", align: 'center'
+          }
+        },
+        {
+          popover: {
+            title: 'Analyzing Strategies',
+            description: 'You can adjust the parameters on the left to see how different pricing moves affect the outcome in real-time.',
+            side: "bottom", align: 'center',
+            onNextClick: () => {
+              if (callbacksRef.current.setMainTool) callbacksRef.current.setMainTool('tamaba');
+              setTimeout(() => tourDriver.moveNext(), 600);
+            }
+          }
+        },
+        {
+          element: '#tour-tamaba-presets',
+          popover: {
+            title: 'TamaBa? Presets',
+            description: 'Welcome to TamaBa?. Select a preset rule here like Shopee Vouchers or Refund policies to test its logic.',
+            side: "bottom", align: 'center'
+          }
+        },
+        {
+          popover: {
+            title: 'Logic Checker Result',
+            description: 'Fill out the conditions, and the tool will use mathematical propositional logic to prove if the claim is valid or if you lack information.',
+            side: "bottom", align: 'center',
+            onNextClick: () => {
+              callbacksRef.current.setSidebarOpen(true);
+              setTimeout(() => tourDriver.moveNext(), 600);
+            }
+          }
+        },
+        {
+          element: '#tour-export-all-btn',
+          popover: {
+            title: 'Export All Saved',
+            description: 'From the Sidebar, you can generate and export all your saved calculations into a single PDF folio!',
+            side: "top", align: 'center',
+            onNextClick: () => {
+              callbacksRef.current.setSidebarOpen(false);
+              setTimeout(() => tourDriver.moveNext(), 600);
+            }
           }
         },
         {
@@ -78,11 +244,11 @@ export const IntroTour: React.FC<Props> = ({ onClose, setAppView, setActiveTab, 
           element: '#tour-help-btn',
           popover: {
             title: 'Help & Information',
-            description: 'Need help? Click next to open our knowledge base.',
+            description: 'Need help? Click next to open our knowledge base for whichever tool you are currently using.',
             side: "left", align: 'start',
             onNextClick: () => {
               callbacksRef.current.setHelpOpen(true);
-              setTimeout(() => tourDriver.moveNext(), 300);
+              setTimeout(() => tourDriver.moveNext(), 600);
             }
           }
         },
@@ -90,122 +256,20 @@ export const IntroTour: React.FC<Props> = ({ onClose, setAppView, setActiveTab, 
           element: '#tour-help-tabs',
           popover: {
             title: 'Knowledge Base',
-            description: 'Inside here, you will find simulated Video Guides and a comprehensive list of FAQs to answer all your investment questions.',
+            description: 'Inside here, you will find simulated Video Guides and comprehensive FAQs. Every tool has its own specific FAQs!',
             side: "bottom", align: 'center',
             onNextClick: () => {
               callbacksRef.current.setHelpOpen(false);
-              setTimeout(() => tourDriver.moveNext(), 300);
+              setTimeout(() => tourDriver.moveNext(), 600);
             }
-          }
-        },
-        {
-          element: '#tour-saved-btn',
-          popover: {
-            title: 'Saved Calculations',
-            description: 'Access your saved snapshots and export PDF reports from here.',
-            side: "left", align: 'start'
           }
         },
         {
           element: '#tour-logout-btn',
           popover: {
             title: 'Log Out',
-            description: 'When you are done, log out of your session securely.',
+            description: 'When you are done, log out of your session securely. That concludes our tour, enjoy MathDiskarte!',
             side: "left", align: 'start'
-          }
-        },
-        {
-          element: '#tour-new-projection',
-          popover: {
-            title: 'Create New Projection',
-            description: 'Clicking on these options will bring you to the analysis tab to calculate your potential returns. Let\'s explore them next!',
-            side: "top", align: 'center',
-            onNextClick: () => {
-              callbacksRef.current.setAppView('calculator');
-              callbacksRef.current.setActiveTab('tbond');
-              setTimeout(() => tourDriver.moveNext(), 400);
-            }
-          }
-        },
-        {
-          element: '#tour-rtb-metrics',
-          popover: {
-            title: 'RTB Analysis & Inflation',
-            description: 'Here you can calculate potential returns on your Retail Treasury Bonds. Notice the new feature: you can now enable an Inflation Adjuster to see your Real Return limit.',
-            side: "top", align: 'center'
-          }
-        },
-        {
-          element: '#tour-quarterly-payout',
-          popover: {
-            title: 'Quarterly Dividends',
-            description: 'You will see exactly how much you can expect to receive every 3 months after the withholding tax is deducted.',
-            side: "top", align: 'center',
-            onNextClick: () => {
-              callbacksRef.current.setActiveTab('mp2');
-              setTimeout(() => tourDriver.moveNext(), 400);
-            }
-          }
-        },
-        {
-          element: '#tour-mp2-metrics',
-          popover: {
-            title: 'MP2 Analysis',
-            description: 'Looking to calculate your Pag-IBIG MP2 tax-free compound growth? Here is everything you need including your total principal deposit sum. The Inflation Adjuster is available here too.',
-            side: "top", align: 'center',
-            onNextClick: () => {
-              callbacksRef.current.setActiveTab('compare');
-              setTimeout(() => tourDriver.moveNext(), 400);
-            }
-          }
-        },
-        {
-          element: '#tour-compare-tab',
-          popover: {
-            title: 'RTB vs MP2 Comparison',
-            description: 'See a side-by-side comparison between RTB and MP2 to decide which asset grows your wealth faster.',
-            side: "bottom", align: 'center',
-            onNextClick: () => {
-              callbacksRef.current.setActiveTab('goalseek');
-              setTimeout(() => tourDriver.moveNext(), 400);
-            }
-          }
-        },
-        {
-          element: '#tour-goalseek-tab',
-          popover: {
-            title: 'Goal-Seek Calculator',
-            description: 'Brand new! Switch to Goal-Seek mode to reverse-engineer your investments. Set a target amount and time horizon, and find out exactly how much you need to deposit.',
-            side: "bottom", align: 'center',
-            onNextClick: () => {
-              callbacksRef.current.setActiveTab('fire');
-              setTimeout(() => tourDriver.moveNext(), 400);
-            }
-          }
-        },
-        {
-          element: '#tour-fire-tab',
-          popover: {
-            title: 'F.I.R.E. Targeter',
-            description: 'Calculate your path to Financial Independence, Retire Early (F.I.R.E.). Find out how much you need to invest to cover your monthly expenses passively.',
-            side: "bottom", align: 'center',
-            onNextClick: () => {
-              callbacksRef.current.setSidebarOpen(true);
-              setTimeout(() => tourDriver.moveNext(), 400);
-            }
-          }
-        },
-        {
-          element: '#tour-export-all-btn',
-          popover: {
-            title: 'Export All Saved',
-            description: 'From the Sidebar, you can now generate and export all your saved calculations into a single PDF folio!',
-            side: "top", align: 'center',
-            onNextClick: () => {
-              callbacksRef.current.setSidebarOpen(false);
-              callbacksRef.current.setAppView('dashboard');
-              setTimeout(() => tourDriver.moveNext(), 300);
-            }
           }
         }
       ],
@@ -217,8 +281,6 @@ export const IntroTour: React.FC<Props> = ({ onClose, setAppView, setActiveTab, 
     tourDriver.drive();
 
     return () => {
-      // Don't call destroy here as it triggers another render state that might cause issues?
-      // Actually we should in strict mode, let's keep it minimal
       try {
         tourDriver.destroy();
       } catch (e) {}

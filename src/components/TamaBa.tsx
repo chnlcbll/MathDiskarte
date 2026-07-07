@@ -414,7 +414,7 @@ export const TamaBa: React.FC = () => {
       </div>
 
       {/* Preset & Custom Cards */}
-      <div className="flex gap-3 overflow-x-auto pb-4 custom-scrollbar">
+      <div className="flex gap-3 overflow-x-auto pb-4 custom-scrollbar" id="tour-tamaba-presets">
         {scenarios.map(s => (
           <button
             key={s.id}
@@ -486,6 +486,7 @@ export const TamaBa: React.FC = () => {
         </div>
 
         {/* Section 3: Result Panel */}
+        
         <div className="space-y-6">
           <AnimatePresence mode="wait">
             {hasAnalyzed && res ? (

@@ -437,7 +437,7 @@ export default function App() {
 
       {/* Intro Modal / Tour */}
       <AnimatePresence>
-        {introOpen && <IntroTour onClose={closeIntro} setAppView={(view: any) => { setMainTool('ipontubo'); setIponTuboView(view); }} setActiveTab={setActiveTab} switchTheme={() => setDarkMode(!darkMode)} setHelpOpen={setHelpOpen} setSidebarOpen={setSidebarOpen} />}
+        {introOpen && <IntroTour onClose={closeIntro} setAppView={(view: any) => { setMainTool('ipontubo'); setIponTuboView(view); }} setActiveTab={setActiveTab} switchTheme={() => setDarkMode(!darkMode)} setHelpOpen={setHelpOpen} setSidebarOpen={setSidebarOpen} setMainTool={setMainTool} />}
       </AnimatePresence>
 
       {/* Help Modal */}

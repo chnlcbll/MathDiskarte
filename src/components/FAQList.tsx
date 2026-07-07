@@ -176,6 +176,7 @@ export const FAQList: React.FC = () => {
             </ul>
             
             <p className="text-sm text-emerald-600 dark:text-teal-400 font-bold mt-1">GEMATMW Z19 - Group 8</p>
+            <p className="text-[8px] text-gray-400/80 dark:text-gray-500 mt-6 leading-tight">Disclaimer: Some parts were made with the help of Gemini.</p>
           </div>
         </div>
       </div>
