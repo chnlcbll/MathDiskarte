@@ -21,15 +21,18 @@ export const TingiCalc: React.FC<Props> = ({ input, setInput }) => {
   let difference = 0;
   let winner = 0; // 0 for tie, 1 for A, 2 for B
 
+  const nameA = input.itemAName ? `${input.itemAName} (Item A)` : 'Item A';
+  const nameB = input.itemBName ? `${input.itemBName} (Item B)` : 'Item B';
+
   if (ppuA > 0 && ppuB > 0) {
     if (ppuA < ppuB) {
       winner = 1;
       difference = ((ppuB - ppuA) / ppuB) * 100;
-      verdict = `Item A is ${difference.toFixed(1)}% cheaper per ${input.unit}`;
+      verdict = `${nameA} is ${difference.toFixed(1)}% cheaper per ${input.unit}`;
     } else if (ppuB < ppuA) {
       winner = 2;
       difference = ((ppuA - ppuB) / ppuA) * 100;
-      verdict = `Item B is ${difference.toFixed(1)}% cheaper per ${input.unit}`;
+      verdict = `${nameB} is ${difference.toFixed(1)}% cheaper per ${input.unit}`;
     } else {
       verdict = 'Both items have the exact same price per unit.';
     }
@@ -57,6 +60,10 @@ export const TingiCalc: React.FC<Props> = ({ input, setInput }) => {
           {/* Item A */}
           <div className="p-4 rounded-2xl border-2 border-gray-100 dark:border-white/10 space-y-4 relative">
             <div className="absolute -top-3 left-4 bg-white dark:bg-[#141417] px-2 text-xs font-bold text-gray-400 uppercase tracking-widest">Item A (e.g. Sachet)</div>
+            <div className="mb-4">
+              <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5">Name (Optional)</label>
+              <input type="text" placeholder="e.g. Sachet" value={input.itemAName || ''} onChange={e => { updateInput('itemAName', e.target.value); playSound('keypress'); }} className="w-full bg-gray-50 dark:bg-black/40 border border-gray-200 dark:border-white/10 px-4 py-2 text-sm font-bold text-gray-900 dark:text-white rounded-xl outline-none focus:border-teal-500 transition" />
+            </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5">Price (₱)</label>
@@ -72,6 +79,10 @@ export const TingiCalc: React.FC<Props> = ({ input, setInput }) => {
           {/* Item B */}
           <div className="p-4 rounded-2xl border-2 border-gray-100 dark:border-white/10 space-y-4 relative">
             <div className="absolute -top-3 left-4 bg-white dark:bg-[#141417] px-2 text-xs font-bold text-gray-400 uppercase tracking-widest">Item B (e.g. Bulk)</div>
+            <div className="mb-4">
+              <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5">Name (Optional)</label>
+              <input type="text" placeholder="e.g. Bulk Bottle" value={input.itemBName || ''} onChange={e => { updateInput('itemBName', e.target.value); playSound('keypress'); }} className="w-full bg-gray-50 dark:bg-black/40 border border-gray-200 dark:border-white/10 px-4 py-2 text-sm font-bold text-gray-900 dark:text-white rounded-xl outline-none focus:border-teal-500 transition" />
+            </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5">Price (₱)</label>
@@ -97,14 +108,14 @@ export const TingiCalc: React.FC<Props> = ({ input, setInput }) => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className={cn("p-4 rounded-2xl border", winner === 1 ? "bg-white/20 border-white/40 shadow-lg" : "bg-black/20 border-transparent")}>
-                <div className="text-xs uppercase tracking-widest mb-1 font-bold text-teal-100">Item A</div>
+                <div className="text-xs uppercase tracking-widest mb-1 font-bold text-teal-100">{nameA}</div>
                 <div className="flex items-end gap-2">
                   <div className="text-3xl font-bold">₱{isFinite(ppuA) ? ppuA.toFixed(4) : '0.0000'}</div>
                   <div className="text-teal-200 text-sm mb-1">/ {input.unit}</div>
                 </div>
               </div>
               <div className={cn("p-4 rounded-2xl border", winner === 2 ? "bg-white/20 border-white/40 shadow-lg" : "bg-black/20 border-transparent")}>
-                <div className="text-xs uppercase tracking-widest mb-1 font-bold text-teal-100">Item B</div>
+                <div className="text-xs uppercase tracking-widest mb-1 font-bold text-teal-100">{nameB}</div>
                 <div className="flex items-end gap-2">
                   <div className="text-3xl font-bold">₱{isFinite(ppuB) ? ppuB.toFixed(4) : '0.0000'}</div>
                   <div className="text-teal-200 text-sm mb-1">/ {input.unit}</div>
@@ -117,7 +128,7 @@ export const TingiCalc: React.FC<Props> = ({ input, setInput }) => {
                 <div className="text-sm font-bold uppercase tracking-widest text-teal-600 mb-2">Verdict</div>
                 <div className="text-2xl font-bold">{verdict}</div>
                 <p className="text-sm mt-3 text-gray-600 font-medium">
-                  Don't be fooled by packaging! Buying {winner === 1 ? "Item A" : "Item B"} gives you more value for your money.
+                  Don't be fooled by packaging! Buying {winner === 1 ? nameA : nameB} gives you more value for your money.
                 </p>
               </div>
             )}

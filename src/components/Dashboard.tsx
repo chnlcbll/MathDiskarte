@@ -216,7 +216,7 @@ export const Dashboard: React.FC<Props> = ({ savedItems, onNavigate, onLoad, use
                   <div>
                     <h4 className="font-bold text-sm text-gray-900 dark:text-white truncate max-w-[180px]">{item.name}</h4>
                     <p className="text-[10px] text-gray-500 uppercase tracking-widest mt-1">
-                      {item.type === 'tbond' ? 'T-bond' : 'MP2'} • {new Date(item.createdAt).toLocaleDateString()}
+                      {item.type === 'tbond' ? 'T-bond' : item.type === 'mp2' ? 'MP2' : item.type === 'goalseek' ? 'Goal Seek' : item.type === 'fire' ? 'F.I.R.E' : item.type === 'compare' ? 'Compare' : item.type === 'utang' ? 'Debt' : item.type === 'sarisari' ? 'Sari-Sari' : item.type === 'tingi' ? 'Tingi' : 'Unknown'} • {new Date(item.createdAt).toLocaleDateString()}
                     </p>
                   </div>
                   <ArrowRight size={16} className="text-gray-300 dark:text-gray-600 group-hover:text-teal-500 transition-colors transform group-hover:translate-x-1"/>

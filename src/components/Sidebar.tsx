@@ -123,7 +123,10 @@ export const Sidebar: React.FC<Props> = ({
                         item.type === 'mp2' ? 'Pag-IBIG MP2' :
                         item.type === 'goalseek' ? 'Goal Seek' :
                         item.type === 'fire' ? 'F.I.R.E. Targeter' :
-                        item.type === 'compare' ? 'RTB vs MP2' : 'Unknown'
+                        item.type === 'compare' ? 'RTB vs MP2' :
+                        item.type === 'utang' ? 'Debt Analyzer' :
+                        item.type === 'sarisari' ? 'Sari-Sari Margin' :
+                        item.type === 'tingi' ? 'Tingi Checker' : 'Unknown'
                       }</span>
                       <span>{new Date(item.createdAt).toLocaleDateString()}</span>
                     </div>
