@@ -32,7 +32,7 @@ const investmentFaqs = [
 ];
 
 const websiteFaqs = [
-  { question: "What is IponTubo?", answer: "IponTubo is a premium companion app designed for Retail Treasury Bonds (RTBs) and MP2 investment planning." },
+  { question: "What is IponTubo?", answer: "IponTubo is a premium companion app designed for Retail Treasury Bonds (RTBs), MP2 investment planning, and analyzing debts and loans." },
   { question: "Is this website free to use?", answer: "Yes, all features of the IponTubo calculator are completely free for everyone to use." },
   { question: "Do you store my personal data?", answer: "No. All your calculations, names, and saved projections stay locally on your device/browser and are not sent to any server." },
   { question: "How can I toggle dark mode?", answer: "Simply click the sun/moon icon at the top right of the dashboard to switch between light and dark themes." },
@@ -40,6 +40,7 @@ const websiteFaqs = [
   { question: "Is it possible to download my results?", answer: "Yes. From your 'Saved' folder, you can generate and download a clean PDF report of a specific projection, or use the 'Export All to PDF' button to download a single folio containing all your saved calculations." },
   { question: "What is Goal Seek capability?", answer: "Goal-Seek or Reverse Calculation allows you to determine exactly how much you need to deposit today, or continually deposit each month, to reach a target financial goal in the future." },
   { question: "What is the F.I.R.E. Targeter?", answer: "The F.I.R.E. (Financial Independence, Retire Early) Targeter takes your monthly living expenses and reverse-engineers the exact principal amount you need invested. It shows you the portfolio size required so you can live entirely off your dividends, without ever touching the original capital." },
+  { question: "What is the Debt Analyzer (Utang Calculator)?", answer: "The Debt Analyzer allows you to evaluate informal '5-6' loans, personal debts, or credit card minimum payment traps. It breaks down your true interest rate and total repayment to help you avoid predatory lending." },
   { question: "How does the RTB vs MP2 Comparison Chart work?", answer: "If you have a lump sum of cash, the Comparison Chart tab provides a head-to-head visual showdown. It calculates the compound interest of the MP2 alongside the simple interest payout of an RTB, while explicitly highlighting the exact monetary loss caused by the 20% RTB withholding tax." },
   { question: "What does the Inflation Adjuster do?", answer: "The optional Inflation Adjuster computes your 'Real Return'. It estimates the future purchasing power of your money by subtracting the effects of inflation from your total yield, so you can see if your investments are truly beating the rising costs of goods." },
   { question: "How accurate are the projected returns?", answer: "Our system uses standardized algorithms mimicking real-world computations. However, because actual rates or bank fees may fluctuate, treat these as highly accurate estimates rather than guarantees." },
