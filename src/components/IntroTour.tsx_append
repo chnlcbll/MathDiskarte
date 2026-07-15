@@ -1,0 +1,12 @@
+        {
+          element: '#tour-utang-tab',
+          popover: {
+            title: 'Debt Analyzer',
+            description: 'Analyze informal "5-6" loans or credit card minimum payment traps to avoid predatory lending.',
+            side: "bottom", align: 'center',
+            onNextClick: () => {
+              if (callbacksRef.current.setMainTool) callbacksRef.current.setMainTool('tawadtactics');
+              setTimeout(() => tourDriver.moveNext(), 600);
+            }
+          }
+        },

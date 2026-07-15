@@ -19,6 +19,7 @@ import { IntroTour } from './components/IntroTour';
 import { SimulatedVideo, VideoSlide } from './components/SimulatedVideo';
 import { GoalSeekCalc } from './components/GoalSeekCalc';
 import { FIRETargeter } from './components/FIRETargeter';
+import { UtangCalc } from './components/UtangCalc';
 import { ComparisonChart } from './components/ComparisonChart';
 import { FlyingIconsProvider } from './components/FlyingIcons';
 import { ConfirmModal } from './components/ConfirmModal';
@@ -37,7 +38,8 @@ export default function App() {
   
   const [mainTool, setMainTool] = useState<'home' | 'ipontubo' | 'tawadtactics' | 'tamaba'>('home');
   const [iponTuboView, setIponTuboView] = useState<'dashboard' | 'calculator'>('dashboard');
-  const [activeTab, setActiveTab] = useState<'tbond' | 'mp2' | 'goalseek' | 'compare' | 'fire'>('tbond');
+  const [activeTab, setActiveTab] = useState<'tbond' | 'mp2' | 'goalseek' | 'compare' | 'fire' | 'utang'>('tbond');
+  const [utangInput, setUtangInput] = useState<UtangInput>({ mode: '5-6', loanAmount: 5000, returnAmount: 6000, daysToPay: 30, ccBalance: 50000, ccAnnualRate: 36, ccMinPaymentPercentage: 5 });
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const [helpTab, setHelpTab] = useState<'faq' | 'video'>('faq');
@@ -132,6 +134,8 @@ export default function App() {
       setFireInput({ monthlyExpenses: 30000, instrument: 'mp2', annualRate: 6.5 });
     } else if (activeTab === 'compare') {
       setCompareInput({ lumpSum: 500000, years: 5, mp2Rate: 6.5, rtbGrossRate: 6.25 });
+    } else if (activeTab === 'utang') {
+      setUtangInput({ mode: '5-6', loanAmount: 5000, returnAmount: 6000, daysToPay: 30, ccBalance: 50000, ccAnnualRate: 36, ccMinPaymentPercentage: 5 });
     }
     setShowConfirmReset(false);
   };
@@ -147,7 +151,8 @@ export default function App() {
          activeTab === 'mp2' ? { mp2Input } : 
          activeTab === 'goalseek' ? { goalSeekInput } :
          activeTab === 'fire' ? { fireInput } : 
-         activeTab === 'compare' ? { compareInput } : {})
+         activeTab === 'compare' ? { compareInput } :
+         activeTab === 'utang' ? { utangInput } : {})
     };
     setSavedItems([newSave, ...savedItems]);
     setSidebarOpen(true);
@@ -361,6 +366,15 @@ export default function App() {
                       >
                         F.I.R.E. Targeter
                       </button>
+                      <button 
+                        id="tour-utang-tab"
+                        onClick={() => { playSound('hover'); setActiveTab('utang'); }}
+                        className={cn("whitespace-nowrap snap-start shrink-0 px-6 py-2 rounded-lg text-xs uppercase tracking-widest font-bold transition", 
+                          activeTab === 'utang' ? "bg-white dark:bg-white/5 dark:text-red-400 border dark:border-red-500/30 shadow text-red-600" : "hover:bg-white/50 dark:hover:bg-white/5 text-gray-500 border border-transparent"
+                        )}
+                      >
+                        Debt Analyzer
+                      </button>
                     </div>
                   </div>
                   
@@ -396,6 +410,10 @@ export default function App() {
                   ) : activeTab === 'fire' ? (
                     <motion.div key="fire" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}>
                       <FIRETargeter input={fireInput} setInput={setFireInput} />
+                    </motion.div>
+                  ) : activeTab === 'utang' ? (
+                    <motion.div key="utang" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}>
+                      <UtangCalc input={utangInput} setInput={setUtangInput} />
                     </motion.div>
                   ) : (
                     <motion.div key="goalseek" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}>

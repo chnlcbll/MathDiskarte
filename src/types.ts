@@ -41,15 +41,28 @@ export interface CompareInput {
   rtbGrossRate: number;
 }
 
+export interface UtangInput {
+  mode: '5-6' | 'cc-min';
+  // 5-6
+  loanAmount: number;
+  returnAmount: number;
+  daysToPay: number;
+  // CC
+  ccBalance: number;
+  ccAnnualRate: number;
+  ccMinPaymentPercentage: number;
+}
+
 export interface SavedCalculation {
   id: string;
   name: string;
-  type: 'tbond' | 'mp2' | 'goalseek' | 'fire' | 'compare';
+  type: 'tbond' | 'mp2' | 'goalseek' | 'fire' | 'compare' | 'utang';
   tbondInput?: TBondInput;
   mp2Input?: MP2Input;
   goalSeekInput?: GoalSeekInput;
   fireInput?: FIREInput;
   compareInput?: CompareInput;
+  utangInput?: UtangInput;
   createdAt: string;
 }
 

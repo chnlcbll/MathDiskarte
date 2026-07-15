@@ -165,6 +165,18 @@ export const IntroTour: React.FC<Props> = ({ onClose, setAppView, setActiveTab, 
             description: 'Calculate your path to Financial Independence. Find out how much you need to invest to cover your monthly expenses passively.',
             side: "bottom", align: 'center',
             onNextClick: () => {
+              callbacksRef.current.setActiveTab('utang');
+              setTimeout(() => tourDriver.moveNext(), 600);
+            }
+          }
+        },
+        {
+          element: '#tour-utang-tab',
+          popover: {
+            title: 'Debt Analyzer',
+            description: 'Analyze informal "5-6" loans or credit card minimum payment traps to avoid predatory lending.',
+            side: "bottom", align: 'center',
+            onNextClick: () => {
               if (callbacksRef.current.setMainTool) callbacksRef.current.setMainTool('tawadtactics');
               setTimeout(() => tourDriver.moveNext(), 600);
             }

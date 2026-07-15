@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+const fs = require('fs');
+
+const content = `import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { CheckCircle2, ArrowRight, ChevronDown, ChevronUp, Bell } from 'lucide-react';
 import { playSound } from '../utils/audio';
@@ -40,6 +42,9 @@ export const HomeDashboard: React.FC<Props> = ({ onNavigate, username }) => {
             <div className="flex items-center gap-2">
               <Bell className="text-teal-500" size={18} />
               <h3 className="font-bold text-sm text-gray-900 dark:text-white">Updates & Announcements</h3>
+              <span className="ml-2 text-[10px] font-bold bg-teal-100 text-teal-800 dark:bg-teal-900/30 dark:text-teal-400 px-2 py-0.5 rounded-full uppercase tracking-widest">
+                New Features
+              </span>
             </div>
             {showUpdates ? <ChevronUp size={18} className="text-gray-400" /> : <ChevronDown size={18} className="text-gray-400" />}
           </button>
@@ -53,20 +58,14 @@ export const HomeDashboard: React.FC<Props> = ({ onNavigate, username }) => {
                 className="border-t border-gray-100 dark:border-white/5"
               >
                 <div className="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="bg-gray-50 dark:bg-black/20 p-4 rounded-xl border border-gray-100 dark:border-white/5 relative">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h4 className="font-bold text-sm text-gray-900 dark:text-white">Debt Analyzer (IponTubo)</h4>
-                      <span className="text-[10px] font-bold bg-teal-100 text-teal-800 dark:bg-teal-900/30 dark:text-teal-400 px-2 py-0.5 rounded-full uppercase tracking-widest">New</span>
-                    </div>
+                  <div className="bg-gray-50 dark:bg-black/20 p-4 rounded-xl border border-gray-100 dark:border-white/5">
+                    <h4 className="font-bold text-sm text-gray-900 dark:text-white mb-1">Debt Analyzer (IponTubo)</h4>
                     <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
                       Analyze informal "5-6" loans or credit card minimum payment traps to avoid predatory lending.
                     </p>
                   </div>
-                  <div className="bg-gray-50 dark:bg-black/20 p-4 rounded-xl border border-gray-100 dark:border-white/5 relative">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h4 className="font-bold text-sm text-gray-900 dark:text-white">New TawadTactics Scenarios</h4>
-                      <span className="text-[10px] font-bold bg-teal-100 text-teal-800 dark:bg-teal-900/30 dark:text-teal-400 px-2 py-0.5 rounded-full uppercase tracking-widest">New</span>
-                    </div>
+                  <div className="bg-gray-50 dark:bg-black/20 p-4 rounded-xl border border-gray-100 dark:border-white/5">
+                    <h4 className="font-bold text-sm text-gray-900 dark:text-white mb-1">New TawadTactics Scenarios</h4>
                     <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
                       Negotiate a Salary offer, or compute your minimum Hourly Rate as a Freelancer based on real costs.
                     </p>
@@ -141,3 +140,6 @@ export const HomeDashboard: React.FC<Props> = ({ onNavigate, username }) => {
     </>
   );
 };
+`;
+
+fs.writeFileSync('src/components/HomeDashboard.tsx', content);
