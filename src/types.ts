@@ -55,6 +55,8 @@ export interface UtangInput {
 
 
 export interface SariSariInput {
+  productName?: string;
+  itemsSold?: number;
   wholesaleCost: number;
   itemsPerPack: number;
   targetMargin: number;

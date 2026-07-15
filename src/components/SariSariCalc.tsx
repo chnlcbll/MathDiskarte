@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const SariSariCalc: React.FC<Props> = ({ input, setInput }) => {
-  const updateInput = (field: keyof SariSariInput, value: number) => {
+  const updateInput = (field: keyof SariSariInput, value: number | string) => {
     setInput({ ...input, [field]: value });
   };
 
@@ -20,6 +20,9 @@ export const SariSariCalc: React.FC<Props> = ({ input, setInput }) => {
   const targetSellingPrice = costPerItem / (1 - input.targetMargin / 100);
   const profitPerItem = targetSellingPrice - costPerItem;
   const totalExpectedProfit = profitPerItem * effectiveItems;
+  const itemsActuallySold = input.itemsSold !== undefined && input.itemsSold > 0 ? input.itemsSold : effectiveItems;
+  const actualRevenue = itemsActuallySold * targetSellingPrice;
+  const actualProfit = actualRevenue - totalCost;
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 animate-in fade-in duration-300">
@@ -30,6 +33,10 @@ export const SariSariCalc: React.FC<Props> = ({ input, setInput }) => {
         </div>
         
         <div className="space-y-4">
+          <div>
+            <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5">Product Name (Optional)</label>
+            <input type="text" placeholder="e.g. Sachet Shampoo" value={input.productName || ''} onChange={e => { updateInput('productName', e.target.value); playSound('keypress'); }} className="w-full bg-gray-50 dark:bg-black/40 border border-gray-200 dark:border-white/10 px-4 py-2.5 text-sm font-bold text-gray-900 dark:text-white rounded-xl outline-none focus:border-blue-500 transition" />
+          </div>
           <div>
             <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5">Wholesale Cost (₱)</label>
             <input type="number" value={input.wholesaleCost || ''} onChange={e => { updateInput('wholesaleCost', Number(e.target.value)); playSound('keypress'); }} className="w-full bg-gray-50 dark:bg-black/40 border border-gray-200 dark:border-white/10 px-4 py-2.5 text-sm font-bold text-gray-900 dark:text-white rounded-xl outline-none focus:border-blue-500 transition" />
@@ -53,6 +60,11 @@ export const SariSariCalc: React.FC<Props> = ({ input, setInput }) => {
             <input type="number" value={input.spoilageRate || ''} onChange={e => { updateInput('spoilageRate', Number(e.target.value)); playSound('keypress'); }} className="w-full bg-gray-50 dark:bg-black/40 border border-gray-200 dark:border-white/10 px-4 py-2.5 text-sm font-bold text-gray-900 dark:text-white rounded-xl outline-none focus:border-blue-500 transition" />
             <p className="text-[10px] text-gray-400 mt-1">If you expect some items to rot, break, or be lost.</p>
           </div>
+          <div>
+            <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5">Items Actually Sold (Optional)</label>
+            <input type="number" value={input.itemsSold || ''} onChange={e => { updateInput('itemsSold', Number(e.target.value)); playSound('keypress'); }} className="w-full bg-gray-50 dark:bg-black/40 border border-gray-200 dark:border-white/10 px-4 py-2.5 text-sm font-bold text-gray-900 dark:text-white rounded-xl outline-none focus:border-blue-500 transition" />
+            <p className="text-[10px] text-gray-400 mt-1">See actual profit if you don't sell all effective items.</p>
+          </div>
         </div>
       </div>
 
@@ -61,7 +73,7 @@ export const SariSariCalc: React.FC<Props> = ({ input, setInput }) => {
           <div className="absolute top-0 right-0 p-4 opacity-20">
             <Calculator size={120} />
           </div>
-          <h3 className="font-bold text-blue-100 uppercase tracking-widest text-xs mb-2 relative z-10">Selling Price To Hit {input.targetMargin}% Margin</h3>
+          <h3 className="font-bold text-blue-100 uppercase tracking-widest text-xs mb-2 relative z-10">Selling Price To Hit {input.targetMargin}% Margin {input.productName ? `for ${input.productName}` : ''}</h3>
           
           <div className="relative z-10 space-y-6 mt-4">
             <div className="flex flex-wrap items-end gap-4">
@@ -80,11 +92,21 @@ export const SariSariCalc: React.FC<Props> = ({ input, setInput }) => {
               </div>
             </div>
 
-            <div className="bg-black/20 p-4 rounded-2xl flex items-start gap-3">
-              <TrendingUp className="text-blue-300 shrink-0 mt-0.5" size={20} />
-              <p className="text-sm text-blue-100 leading-relaxed">
-                If you sell all {effectiveItems.toFixed(1)} effective items at ₱{isFinite(targetSellingPrice) ? targetSellingPrice.toFixed(2) : '0.00'}, you will recover your total cost of <strong>₱{totalCost.toFixed(2)}</strong> and earn a total net profit of <strong>₱{isFinite(totalExpectedProfit) ? totalExpectedProfit.toFixed(2) : '0.00'}</strong>.
-              </p>
+            <div className="bg-black/20 p-4 rounded-2xl flex flex-col gap-3">
+              <div className="flex items-start gap-3">
+                <TrendingUp className="text-blue-300 shrink-0 mt-0.5" size={20} />
+                <p className="text-sm text-blue-100 leading-relaxed">
+                  If you sell all {effectiveItems.toFixed(1)} effective items {input.productName ? `of ${input.productName} ` : ''}at ₱{isFinite(targetSellingPrice) ? targetSellingPrice.toFixed(2) : '0.00'}, you will recover your total cost of <strong>₱{totalCost.toFixed(2)}</strong> and earn a total net profit of <strong>₱{isFinite(totalExpectedProfit) ? totalExpectedProfit.toFixed(2) : '0.00'}</strong>.
+                </p>
+              </div>
+              {input.itemsSold !== undefined && input.itemsSold > 0 && input.itemsSold !== effectiveItems && (
+                <div className="flex items-start gap-3 pt-3 border-t border-white/10">
+                  <Calculator className="text-orange-300 shrink-0 mt-0.5" size={20} />
+                  <p className="text-sm text-orange-100 leading-relaxed">
+                    If you only sell {input.itemsSold} items, your actual {actualProfit >= 0 ? 'profit' : 'loss'} will be <strong className={actualProfit >= 0 ? "text-emerald-300" : "text-red-400"}>₱{Math.abs(actualProfit).toFixed(2)}</strong>.
+                  </p>
+                </div>
+              )}
             </div>
             {input.spoilageRate > 0 && (
               <div className="bg-orange-500/20 border border-orange-500/30 p-4 rounded-2xl flex items-start gap-3 text-orange-200">
