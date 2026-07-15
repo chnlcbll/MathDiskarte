@@ -20,6 +20,9 @@ import { SimulatedVideo, VideoSlide } from './components/SimulatedVideo';
 import { GoalSeekCalc } from './components/GoalSeekCalc';
 import { FIRETargeter } from './components/FIRETargeter';
 import { UtangCalc } from './components/UtangCalc';
+import { SariSariCalc } from './components/SariSariCalc';
+import { TingiCalc } from './components/TingiCalc';
+import { SariSariInput, TingiInput } from './types';
 import { ComparisonChart } from './components/ComparisonChart';
 import { FlyingIconsProvider } from './components/FlyingIcons';
 import { ConfirmModal } from './components/ConfirmModal';
@@ -38,8 +41,10 @@ export default function App() {
   
   const [mainTool, setMainTool] = useState<'home' | 'ipontubo' | 'tawadtactics' | 'tamaba'>('home');
   const [iponTuboView, setIponTuboView] = useState<'dashboard' | 'calculator'>('dashboard');
-  const [activeTab, setActiveTab] = useState<'tbond' | 'mp2' | 'goalseek' | 'compare' | 'fire' | 'utang'>('tbond');
+  const [activeTab, setActiveTab] = useState<'tbond' | 'mp2' | 'goalseek' | 'compare' | 'fire' | 'utang' | 'sarisari' | 'tingi'>('tbond');
   const [utangInput, setUtangInput] = useState<UtangInput>({ mode: '5-6', loanAmount: 5000, returnAmount: 6000, daysToPay: 30, ccBalance: 50000, ccAnnualRate: 36, ccMinPaymentPercentage: 5 });
+  const [sariSariInput, setSariSariInput] = useState<SariSariInput>({ wholesaleCost: 100, itemsPerPack: 10, targetMargin: 20, transpoCost: 0, spoilageRate: 0 });
+  const [tingiInput, setTingiInput] = useState<TingiInput>({ itemAPrice: 10, itemAQuantity: 1, itemBPrice: 90, itemBQuantity: 10, unit: 'piece' });
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const [helpTab, setHelpTab] = useState<'faq' | 'video'>('faq');
@@ -135,6 +140,12 @@ export default function App() {
     } else if (activeTab === 'compare') {
       setCompareInput({ lumpSum: 500000, years: 5, mp2Rate: 6.5, rtbGrossRate: 6.25 });
     } else if (activeTab === 'utang') {
+      title = `Debt Analyzer - ${new Date().toLocaleDateString()}`;
+    } else if (activeTab === 'sarisari') {
+      title = `Sari-Sari Margin - ${new Date().toLocaleDateString()}`;
+    } else if (activeTab === 'tingi') {
+      title = `Tingi Checker - ${new Date().toLocaleDateString()}`;
+    
       setUtangInput({ mode: '5-6', loanAmount: 5000, returnAmount: 6000, daysToPay: 30, ccBalance: 50000, ccAnnualRate: 36, ccMinPaymentPercentage: 5 });
     }
     setShowConfirmReset(false);
@@ -152,7 +163,9 @@ export default function App() {
          activeTab === 'goalseek' ? { goalSeekInput } :
          activeTab === 'fire' ? { fireInput } : 
          activeTab === 'compare' ? { compareInput } :
-         activeTab === 'utang' ? { utangInput } : {})
+         activeTab === 'utang' ? { utangInput } : 
+         activeTab === 'sarisari' ? { sarisariInput: sariSariInput } : 
+         activeTab === 'tingi' ? { tingiInput } : {})
     };
     setSavedItems([newSave, ...savedItems]);
     setSidebarOpen(true);
@@ -375,6 +388,22 @@ export default function App() {
                       >
                         Debt Analyzer
                       </button>
+                      <button 
+                        onClick={() => { playSound('hover'); setActiveTab('sarisari'); }}
+                        className={cn("whitespace-nowrap snap-start shrink-0 px-6 py-2 rounded-lg text-xs uppercase tracking-widest font-bold transition", 
+                          activeTab === 'sarisari' ? "bg-white dark:bg-white/5 dark:text-blue-400 border dark:border-blue-500/30 shadow text-blue-600" : "hover:bg-white/50 dark:hover:bg-white/5 text-gray-500 border border-transparent"
+                        )}
+                      >
+                        Sari-Sari Margin
+                      </button>
+                      <button 
+                        onClick={() => { playSound('hover'); setActiveTab('tingi'); }}
+                        className={cn("whitespace-nowrap snap-start shrink-0 px-6 py-2 rounded-lg text-xs uppercase tracking-widest font-bold transition", 
+                          activeTab === 'tingi' ? "bg-white dark:bg-white/5 dark:text-teal-400 border dark:border-teal-500/30 shadow text-teal-600" : "hover:bg-white/50 dark:hover:bg-white/5 text-gray-500 border border-transparent"
+                        )}
+                      >
+                        Tingi Checker
+                      </button>
                     </div>
                   </div>
                   
@@ -411,10 +440,20 @@ export default function App() {
                     <motion.div key="fire" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}>
                       <FIRETargeter input={fireInput} setInput={setFireInput} />
                     </motion.div>
+                  
                   ) : activeTab === 'utang' ? (
                     <motion.div key="utang" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}>
                       <UtangCalc input={utangInput} setInput={setUtangInput} />
                     </motion.div>
+                  ) : activeTab === 'sarisari' ? (
+                    <motion.div key="sarisari" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}>
+                      <SariSariCalc input={sariSariInput} setInput={setSariSariInput} />
+                    </motion.div>
+                  ) : activeTab === 'tingi' ? (
+                    <motion.div key="tingi" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}>
+                      <TingiCalc input={tingiInput} setInput={setTingiInput} />
+                    </motion.div>
+
                   ) : (
                     <motion.div key="goalseek" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}>
                       <GoalSeekCalc input={goalSeekInput} setInput={setGoalSeekInput} />

@@ -53,16 +53,35 @@ export interface UtangInput {
   ccMinPaymentPercentage: number;
 }
 
+
+export interface SariSariInput {
+  wholesaleCost: number;
+  itemsPerPack: number;
+  targetMargin: number;
+  transpoCost: number;
+  spoilageRate: number;
+}
+
+export interface TingiInput {
+  itemAPrice: number;
+  itemAQuantity: number;
+  itemBPrice: number;
+  itemBQuantity: number;
+  unit: string;
+}
+
 export interface SavedCalculation {
   id: string;
   name: string;
-  type: 'tbond' | 'mp2' | 'goalseek' | 'fire' | 'compare' | 'utang';
+  type: 'tbond' | 'mp2' | 'goalseek' | 'fire' | 'compare' | 'utang' | 'sarisari' | 'tingi';
   tbondInput?: TBondInput;
   mp2Input?: MP2Input;
   goalSeekInput?: GoalSeekInput;
   fireInput?: FIREInput;
   compareInput?: CompareInput;
   utangInput?: UtangInput;
+  sarisariInput?: SariSariInput;
+  tingiInput?: TingiInput;
   createdAt: string;
 }
 
